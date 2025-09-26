@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Algorithmic Alliance Club Portal (Web)
+
+A modern, web-based portal for the Algorithmic Alliance Club. It provides a clean landing experience with brand-aligned styling, entry points for authentication, and a foundation for member-facing features.
+
+## Features
+
+- Responsive two-column landing page
+  - Left: full-height banner using `public/aa-portal-banner.png`
+  - Right: flat, minimalist content with a concise intro and CTAs
+- Authentication entry points: `Login` and `Register` (Sign up)
+  - Routes: `/login`, `/signup`, `/forgot-password`
+- Brand styling
+  - Primary color wired via CSS variables: `#2532AE`
+  - Login button uses the brand primary with accessible foreground contrast
+- Utility pages: `/terms`, `/privacy`
+
+## Tech Stack
+
+- Next.js (App Router) 15
+- React 19
+- Tailwind CSS v4
+- shadcn/ui + Radix UI primitives
+- React Hook Form + Zod (for future forms)
 
 ## Getting Started
 
-First, run the development server:
+Prerequisites:
+- Node.js 18+ (recommended)
+- npm, pnpm, or yarn
 
-```bash
+Install dependencies and run the dev server:
+
+```bash path=null start=null
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# visit http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production build:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash path=null start=null
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure (high level)
 
-## Learn More
+- `src/app/page.js` — Landing page (2-column layout, banner on the left)
+- `src/app/login/page.js` — Login route
+- `src/app/signup/page.js` — Registration route
+- `src/app/forgot-password/page.js` — Password reset route
+- `src/app/globals.css` — Design tokens (CSS variables) and Tailwind setup
+- `src/components/ui/*` — Reusable UI primitives (buttons, inputs, etc.)
 
-To learn more about Next.js, take a look at the following resources:
+## Theming / Branding
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Brand color is configured via CSS variables in `src/app/globals.css`:
+- `--primary: #2532AE`
+- `--primary-foreground: #ffffff`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Buttons and components reference these variables, so updating the primary color will automatically propagate across the UI.
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project works well on Vercel or any Node-capable host:
+- Build with `npm run build`
+- Start with `npm start`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For Vercel, you can import this repo and keep the default Next.js settings.
+
+## License
+
+Copyright © Algorithmic Alliance. All rights reserved.
