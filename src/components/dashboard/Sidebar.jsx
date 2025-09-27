@@ -5,7 +5,8 @@ import {
   Megaphone,
   Calendar,
   BookOpen,
-  IdCard
+  IdCard,
+  Inbox
 } from "lucide-react";
 import {
   Sidebar,
@@ -49,6 +50,12 @@ const navItems = [
     label: "Digital ID", 
     icon: IdCard 
   },
+  {
+    href: "/dashboard/inbox",
+    label: "Inbox",
+    comingSoon: true,
+    icon: Inbox
+  }
 ];
 
 export function AppSidebar() {

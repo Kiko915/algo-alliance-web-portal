@@ -31,7 +31,12 @@ export function AnnouncementsWidget({ items }) {
           items.slice(0, 5).map((a, idx) => (
             <div key={a.id} className="space-y-2">
               <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-gray-900">{a.title}</p>
+                <Link 
+                  href={`/dashboard/announcements/${a.id}`}
+                  className="text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors"
+                >
+                  {a.title}
+                </Link>
                 <span className="text-xs text-gray-500">{a.date}</span>
               </div>
               {idx !== Math.min(items.length, 5) - 1 && <Separator />}

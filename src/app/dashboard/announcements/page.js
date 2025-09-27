@@ -166,7 +166,12 @@ export default function AnnouncementsPage() {
                       </Badge>
                     </div>
                     <CardTitle className="text-xl leading-tight">
-                      {announcement.title}
+                      <Link 
+                        href={`/dashboard/announcements/${announcement.id}`}
+                        className="text-gray-900 hover:text-blue-600 transition-colors"
+                      >
+                        {announcement.title}
+                      </Link>
                     </CardTitle>
                   </div>
                 </div>
