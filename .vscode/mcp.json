@@ -6,6 +6,10 @@
         "shadcn@latest",
         "mcp"
       ]
+    },
+    "appwrite-docs": {
+      "url": "https://mcp-for-docs.appwrite.io",
+      "type": "http"
     }
   }
 }
