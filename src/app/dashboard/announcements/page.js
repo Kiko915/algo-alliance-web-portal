@@ -1,23 +1,20 @@
-"use client";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { 
   Megaphone, 
   Clock, 
-  ArrowLeft, 
-  Search
+  ArrowLeft
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
 
-export default function AnnouncementsPage() {
-  const [searchTerm, setSearchTerm] = useState("");
-  // Sample announcements data - replace with real data later
-  const announcements = [
+// Simulate async data fetching
+async function getAnnouncements() {
+  // Simulate loading delay to trigger loading.js
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  
+  return [
     {
       id: 1,
       title: "Welcome to Algorithmic Alliance Member Portal",
@@ -64,6 +61,10 @@ export default function AnnouncementsPage() {
       category: "Survey"
     }
   ];
+}
+
+export default async function AnnouncementsPage() {
+  const announcements = await getAnnouncements();
 
   const getPriorityColor = (priority) => {
     switch (priority) {
@@ -87,11 +88,6 @@ export default function AnnouncementsPage() {
     });
   };
 
-  const filteredAnnouncements = announcements.filter(announcement =>
-    announcement.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    announcement.content.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
     <div className="space-y-6">
       {/* Simple Header */}
@@ -107,49 +103,27 @@ export default function AnnouncementsPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Announcements</h1>
-            <p className="text-gray-600 mt-1">{filteredAnnouncements.length} announcements</p>
-          </div>
-          
-          <div className="relative max-w-sm">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <Input
-              placeholder="Search announcements..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
-            />
+            <p className="text-gray-600 mt-1">{announcements.length} announcements</p>
           </div>
         </div>
       </div>
 
       {/* Simple Announcements List */}
       <div className="space-y-4">
-        {filteredAnnouncements.length === 0 ? (
+        {announcements.length === 0 ? (
           <div className="text-center py-16">
             <div className="p-4 bg-gray-50 rounded-full w-fit mx-auto mb-6">
               <Megaphone className="h-12 w-12 text-gray-300" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              {searchTerm ? 'No matching announcements' : 'No announcements yet'}
+              No announcements yet
             </h3>
             <p className="text-gray-500 max-w-md mx-auto mb-6">
-              {searchTerm 
-                ? `We couldn't find any announcements matching "${searchTerm}". Try adjusting your search.`
-                : 'Stay tuned! New announcements will appear here when they\'re available.'
-              }
+              Stay tuned! New announcements will appear here when they're available.
             </p>
-            {searchTerm && (
-              <Button 
-                variant="outline" 
-                onClick={() => setSearchTerm('')}
-                className="mb-4"
-              >
-                Clear Search
-              </Button>
-            )}
           </div>
         ) : (
-          filteredAnnouncements.map((announcement) => (
+          announcements.map((announcement) => (
             <Card key={announcement.id} className="rounded-xl shadow">
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between gap-4">
